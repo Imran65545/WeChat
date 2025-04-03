@@ -8,6 +8,21 @@ const io = require("socket.io")(PORT, {
     }
 });
 
+const express = require("express");
+const app = express();
+const port = process.env.PORT || 8000;
+
+// Add this test route
+app.get("/", (req, res) => {
+    res.send("Backend is working!");
+});
+
+// Start the server
+app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
+});
+
+
 
 
 
