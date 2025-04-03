@@ -1,10 +1,15 @@
 //node server whichwill handle our socketio connections
-const io = require("socket.io")(8000, {
+const PORT = process.env.PORT || 8000; // Use the port assigned by Render
+
+const io = require("socket.io")(PORT, {
     cors: {
         origin: "*",
         methods: ["GET", "POST"]
     }
 });
+
+
+
 
 const users= {};
 
