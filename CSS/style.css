@@ -74,30 +74,29 @@ h1{
     border: 2px solid black;
     border-radius: 6px;
 }
-
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 480px) {
     .send {
         display: flex;
-        justify-content: center;
-        align-items: center;
+        justify-content: center; /* Center items */
         width: 100%;
         padding: 5px;
     }
 
     #send-container {
         display: flex;
+        flex-wrap: nowrap; /* Prevents items from wrapping */
         width: 90%;
+        align-items: center;
     }
 
     #messageInp {
-        flex: 1;
-        padding: 10px;
-        font-size: 16px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
+        flex: 1; /* Input takes available space */
+        padding: 8px;
+        font-size: 14px;
     }
 
     .btn {
+        width: auto;
         padding: 10px;
         font-size: 16px;
         border: none;
