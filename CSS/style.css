@@ -74,3 +74,21 @@ h1{
     border: 2px solid black;
     border-radius: 6px;
 }
+
+@media (max-width: 600px) {
+    .chat-container {
+        position: relative;
+    }
+
+    .message-input {
+        width: 80%;
+        display: inline-block;
+    }
+
+    .send-button {
+        width: 15%;
+        display: inline-block;
+        margin-left: 5px; /* Add spacing between input and button */
+        vertical-align: middle;
+    }
+}
