@@ -1,25 +1,22 @@
 //node server whichwill handle our socketio connections
-const PORT = process.env.PORT || 8000; // Use the port assigned by Render
-
-const io = require("socket.io")(PORT, {
-    cors: {
-        origin: "*",
-        methods: ["GET", "POST"]
-    }
-});
+// const PORT = process.env.PORT || 8000; // Use the port assigned by Render
 
 const express = require("express");
+const http = require("http");
+const socketIO = require("socket.io");
+const cors = require("cors");
+
+const PORT = process.env.PORT || 10000; // ✅ define PORT first
+
 const app = express();
-const port = process.env.PORT || 8000;
+app.use(cors());
 
-// Add this test route
-app.get("/", (req, res) => {
-    res.send("Backend is working!");
-});
-
-// Start the server
-app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
+const server = http.createServer(app);
+const io = socketIO(server, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"]
+  }
 });
 
 
@@ -50,3 +47,7 @@ io.on('connection',socket=>{
         // }
     });
 });
+
+server.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
