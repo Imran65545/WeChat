@@ -2,22 +2,24 @@
 // const PORT = process.env.PORT || 8000; // Use the port assigned by Render
 
 const express = require("express");
-const http = require("http");
-const socketIO = require("socket.io");
-const cors = require("cors");
-
-const PORT = process.env.PORT || 10000; // ✅ define PORT first
-
 const app = express();
-app.use(cors());
 
+const http = require("http");
 const server = http.createServer(app);
-const io = socketIO(server, {
+
+const io = require("socket.io")(server, {
   cors: {
-    origin: "*",
+    origin: "*", // or specify your frontend URL here
     methods: ["GET", "POST"]
   }
 });
+
+const PORT = process.env.PORT || 10000;
+
+server.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+
 
 
 
@@ -48,6 +50,3 @@ io.on('connection',socket=>{
     });
 });
 
-server.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-  });
