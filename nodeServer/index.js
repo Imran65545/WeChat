@@ -1,24 +1,27 @@
 //node server whichwill handle our socketio connections
 // const PORT = process.env.PORT || 8000; // Use the port assigned by Render
-
 const express = require("express");
+const cors = require("cors");
+const path = require("path");
+
 const app = express();
-
-const http = require("http");
-const server = http.createServer(app);
-
-const io = require("socket.io")(server, {
-  cors: {
-    origin: "*", // or specify your frontend URL here
-    methods: ["GET", "POST"]
-  }
-});
-
 const PORT = process.env.PORT || 10000;
 
-server.listen(PORT, () => {
+// Middleware
+app.use(cors());
+app.use(express.static("public")); // If you have static files
+
+// ✅ Add this route to handle root URL
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
+});
+
+// Your Socket.IO or other logic...
+
+app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
 
 
 
