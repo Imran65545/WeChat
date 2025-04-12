@@ -5,7 +5,7 @@ const messageInput = document.getElementById('messageInp');
 const messageContainer = document.querySelector(".container");
 const audio = new Audio('ting.mp3');
 
-// 🔔 Ask for notification permission at start
+// 🔔 Ask for notification permission on page load
 if (Notification.permission !== "granted") {
     Notification.requestPermission();
 }
@@ -25,11 +25,9 @@ const append = (message, position) => {
     messageElement.classList.add(position);
     messageContainer.append(messageElement);
 
-    // 🔊 Play sound for received messages
-    if (position == 'left') {
+    // 🔊 Play notification sound for incoming messages
+    if (position === 'left') {
         audio.play();
-    } else {
-        console.log("Audio not played for right position");
     }
 };
 
@@ -48,12 +46,11 @@ socket.on('receive', data => {
     if (document.hidden && Notification.permission === "granted") {
         new Notification("New message from " + data.name, {
             body: data.message,
-            icon: "vector-chat-icon.jpg", // Must be in same folder or accessible path
+            icon: "https://github.com/Imran65545/WeChat/blob/main/vector-chat-icon.jpg" // ✅ Replace this with your real repo link
         });
     }
 });
 
 socket.on('left', (name) => {
-    console.log("User left:", name);
     append(`${name} left the chat`, 'right');
 });
