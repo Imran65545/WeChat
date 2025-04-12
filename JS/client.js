@@ -46,7 +46,8 @@ socket.on('receive', data => {
     if (document.hidden && Notification.permission === "granted") {
         new Notification("New message from " + data.name, {
             body: data.message,
-            icon: "https://github.com/Imran65545/WeChat/blob/main/vector-chat-icon.jpg" // ✅ Replace this with your real repo link
+            icon: "https://raw.githubusercontent.com/Imran65545/WeChat/main/vector-chat-icon.jpg"
+ // ✅ Replace this with your real repo link
         });
     }
 });
